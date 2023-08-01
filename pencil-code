@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3D Pencil</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const width = canvas.width = window.innerWidth;
+    const height = canvas.height = window.innerHeight;
+
+    const pencilWidth = 15;
+    const pencilLength = 200;
+
+    // Function to draw the 3D pencil
+    function drawPencil(x, y) {
+      // Draw pencil body
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - pencilWidth, y + pencilLength);
+      ctx.lineTo(x + pencilWidth, y + pencilLength);
+      ctx.closePath();
+      ctx.fillStyle = "gray";
+      ctx.fill();
+
+      // Draw pencil tip
+      ctx.beginPath();
+      ctx.moveTo(x - pencilWidth, y + pencilLength);
+      ctx.lineTo(x, y + pencilLength + 40);
+      ctx.lineTo(x + pencilWidth, y + pencilLength);
+      ctx.closePath();
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      // Draw pencil lead
+      ctx.beginPath();
+      ctx.moveTo(x - 5, y + pencilLength + 40);
+      ctx.lineTo(x + 5, y + pencilLength + 40);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "gray";
+      ctx.stroke();
+    }
+
+    // Draw the 3D pencil at the center of the canvas
+    const centerX = width / 2;
+    const centerY = height / 2;
+    drawPencil(centerX, centerY);
+  </script>
+</body>
+</html>
